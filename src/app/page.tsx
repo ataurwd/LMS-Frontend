@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 
@@ -7,80 +9,173 @@ export default function Home() {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '70vh',
-      padding: '2rem',
-      backgroundColor: '#fafafa',
-      fontFamily: 'inherit'
+      padding: '5rem 2rem',
+      position: 'relative',
+      overflow: 'hidden',
     }}>
+      {/* Glow Effects */}
       <div style={{
-        maxWidth: '800px',
+        position: 'absolute',
+        top: '-10%',
+        left: '15%',
+        width: '500px',
+        height: '500px',
+        background: 'radial-gradient(circle, rgba(99,102,241,0.08) 0%, rgba(255,255,255,0) 70%)',
+        zIndex: -1,
+      }} />
+      <div style={{
+        position: 'absolute',
+        bottom: '10%',
+        right: '10%',
+        width: '400px',
+        height: '400px',
+        background: 'radial-gradient(circle, rgba(124,58,237,0.08) 0%, rgba(255,255,255,0) 70%)',
+        zIndex: -1,
+      }} />
+
+      <div style={{
+        maxWidth: '900px',
         textAlign: 'center',
-        margin: '0 auto'
+        margin: '0 auto',
+        zIndex: 1,
       }}>
+        {/* Banner Pill */}
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          padding: '0.4rem 1rem',
+          borderRadius: '99px',
+          background: 'var(--accent-light)',
+          border: '1px solid rgba(79, 70, 229, 0.15)',
+          color: '#4f46e5',
+          fontSize: '0.8rem',
+          fontWeight: 600,
+          marginBottom: '2rem',
+          letterSpacing: '0.05em',
+          textTransform: 'uppercase'
+        }}>
+          ✨ Next-Gen Learning Platform
+        </div>
+
         <h1 style={{
-          fontSize: '3rem',
+          fontSize: '3.75rem',
           fontWeight: 800,
-          letterSpacing: '-0.05em',
-          marginBottom: '1rem',
-          color: '#111'
+          letterSpacing: '-0.04em',
+          lineHeight: 1.1,
+          marginBottom: '1.5rem',
+          color: 'var(--primary-color)'
         }}>
-          Learn Without Limits.
+          Master New Skills.<br />
+          <span style={{
+            background: 'var(--accent-gradient)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>
+            Shape Your Future.
+          </span>
         </h1>
+        
         <p style={{
-          fontSize: '1.25rem',
-          color: '#666',
-          marginBottom: '2.5rem',
-          lineHeight: 1.6
+          fontSize: '1.2rem',
+          color: 'var(--text-secondary)',
+          marginBottom: '3rem',
+          lineHeight: 1.6,
+          maxWidth: '640px',
+          margin: '0 auto 3rem'
         }}>
-          Welcome to the next generation of online education. Explore courses designed by industry specialists, participate in interactive assessments, and track your accomplishments.
+          Access specialized courses, timed assessments, and live analytics. Experience a modern, distraction-free learning environment built for builders.
         </p>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '1.5rem',
-          marginBottom: '3rem',
-          textAlign: 'left'
-        }}>
-          <Link href="/courses" style={cardStyle}>
-            <h3 style={cardTitleStyle}>Course Catalog &rarr;</h3>
-            <p style={cardDescStyle}>Browse our catalog of professional training lectures and modules.</p>
+        {/* CTA Buttons */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.25rem', marginBottom: '5rem' }}>
+          <Link href="/courses" style={{
+            background: 'var(--primary-color)',
+            color: '#fff',
+            padding: '1rem 2.25rem',
+            borderRadius: '10px',
+            fontWeight: 600,
+            fontSize: '0.95rem',
+            boxShadow: 'var(--shadow-md)',
+            transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.background = 'var(--primary-hover)'}
+          onMouseLeave={(e) => e.currentTarget.style.background = 'var(--primary-color)'}
+          >
+            Explore Catalog
           </Link>
-
-          <Link href="/login" style={cardStyle}>
-            <h3 style={cardTitleStyle}>Student Dashboard &rarr;</h3>
-            <p style={cardDescStyle}>Access your enrolled courses, quizzes, assignments, and certificates.</p>
-          </Link>
-
-          <Link href="/login" style={cardStyle}>
-            <h3 style={cardTitleStyle}>Instructor Studio &rarr;</h3>
-            <p style={cardDescStyle}>Manage curriculum modules, view student analytics, and upload video content.</p>
+          <Link href="/register" style={{
+            background: '#fff',
+            color: 'var(--primary-color)',
+            padding: '1rem 2.25rem',
+            borderRadius: '10px',
+            border: '1px solid var(--border-color)',
+            fontWeight: 600,
+            fontSize: '0.95rem',
+            boxShadow: 'var(--shadow-sm)',
+            transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = 'var(--border-hover)';
+            e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'var(--border-color)';
+            e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+          }}
+          >
+            Create Free Account
           </Link>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
-          <Link href="/courses" style={{
-            backgroundColor: '#111',
-            color: '#fff',
-            padding: '0.8rem 2rem',
-            borderRadius: '6px',
-            fontWeight: 600,
-            textDecoration: 'none'
-          }}>
-            Browse Courses
-          </Link>
-          <Link href="/register" style={{
-            backgroundColor: '#fff',
-            color: '#111',
-            padding: '0.8rem 2rem',
-            borderRadius: '6px',
-            border: '1px solid #ddd',
-            fontWeight: 600,
-            textDecoration: 'none'
-          }}>
-            Create Account
-          </Link>
+        {/* Feature Cards Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: '1.5rem',
+          textAlign: 'left',
+        }}>
+          <div style={cardStyle} 
+               onMouseEnter={(e) => {
+                 e.currentTarget.style.transform = 'translateY(-4px)';
+                 e.currentTarget.style.boxShadow = 'var(--shadow-xl)';
+               }}
+               onMouseLeave={(e) => {
+                 e.currentTarget.style.transform = 'translateY(0)';
+                 e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+               }}>
+            <div style={iconWrapperStyle}>📚</div>
+            <h3 style={cardTitleStyle}>Structured Modules</h3>
+            <p style={cardDescStyle}>Clean, distraction-free curriculums designed to help you absorb knowledge efficiently.</p>
+          </div>
+
+          <div style={cardStyle}
+               onMouseEnter={(e) => {
+                 e.currentTarget.style.transform = 'translateY(-4px)';
+                 e.currentTarget.style.boxShadow = 'var(--shadow-xl)';
+               }}
+               onMouseLeave={(e) => {
+                 e.currentTarget.style.transform = 'translateY(0)';
+                 e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+               }}>
+            <div style={iconWrapperStyle}>⏱️</div>
+            <h3 style={cardTitleStyle}>Timed Assessments</h3>
+            <p style={cardDescStyle}>Challenge your understanding with interactive quizzes and detailed progress reviews.</p>
+          </div>
+
+          <div style={cardStyle}
+               onMouseEnter={(e) => {
+                 e.currentTarget.style.transform = 'translateY(-4px)';
+                 e.currentTarget.style.boxShadow = 'var(--shadow-xl)';
+               }}
+               onMouseLeave={(e) => {
+                 e.currentTarget.style.transform = 'translateY(0)';
+                 e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+               }}>
+            <div style={iconWrapperStyle}>📊</div>
+            <h3 style={cardTitleStyle}>Instructor Studio</h3>
+            <p style={cardDescStyle}>Empower educators with course management tools and rich student analytics.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -89,25 +184,35 @@ export default function Home() {
 
 const cardStyle: React.CSSProperties = {
   display: 'block',
-  padding: '1.5rem',
-  backgroundColor: '#fff',
-  borderRadius: '8px',
-  border: '1px solid #eaeaea',
-  textDecoration: 'none',
-  color: 'inherit',
-  transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+  padding: '2rem',
+  backgroundColor: '#ffffff',
+  borderRadius: '12px',
+  border: '1px solid var(--border-color)',
+  boxShadow: 'var(--shadow-md)',
+  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+};
+
+const iconWrapperStyle: React.CSSProperties = {
+  fontSize: '1.75rem',
+  marginBottom: '1.25rem',
+  width: '48px',
+  height: '48px',
+  borderRadius: '10px',
+  backgroundColor: '#f1f5f9',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
 };
 
 const cardTitleStyle: React.CSSProperties = {
-  fontSize: '1.2rem',
-  fontWeight: 600,
+  fontSize: '1.15rem',
+  fontWeight: 700,
   marginBottom: '0.5rem',
-  color: '#111',
+  color: 'var(--primary-color)',
 };
 
 const cardDescStyle: React.CSSProperties = {
   fontSize: '0.9rem',
-  color: '#666',
-  lineHeight: 1.5,
+  color: 'var(--text-secondary)',
+  lineHeight: 1.6,
 };
-

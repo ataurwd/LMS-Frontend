@@ -1,18 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { AuthProvider } from "@/context/AuthContext";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "LMS Platform | Enterprise Learning System",
@@ -25,21 +14,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>
+    <html lang="en">
+      <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <AuthProvider>
-          <header>
+          <header style={{ position: 'sticky', top: 0, zIndex: 100 }}>
             <Navbar />
           </header>
-          <main style={{ flex: 1 }}>
+          <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             {children}
           </main>
           <footer style={{
-            padding: '2rem',
+            padding: '2.5rem 2rem',
             textAlign: 'center',
-            borderTop: '1px solid #eaeaea',
+            borderTop: '1px solid var(--border-color)',
             fontSize: '0.875rem',
-            color: '#666'
+            color: 'var(--text-secondary)',
+            backgroundColor: '#ffffff'
           }}>
             &copy; {new Date().getFullYear()} LMS Platform. All rights reserved.
           </footer>
@@ -48,5 +38,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-
