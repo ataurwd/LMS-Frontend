@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
+import { AuthProvider } from "@/context/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,23 +27,26 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
-        <header>
-          <Navbar />
-        </header>
-        <main style={{ flex: 1 }}>
-          {children}
-        </main>
-        <footer style={{
-          padding: '2rem',
-          textAlign: 'center',
-          borderTop: '1px solid #eaeaea',
-          fontSize: '0.875rem',
-          color: '#666'
-        }}>
-          &copy; {new Date().getFullYear()} LMS Platform. All rights reserved.
-        </footer>
+        <AuthProvider>
+          <header>
+            <Navbar />
+          </header>
+          <main style={{ flex: 1 }}>
+            {children}
+          </main>
+          <footer style={{
+            padding: '2rem',
+            textAlign: 'center',
+            borderTop: '1px solid #eaeaea',
+            fontSize: '0.875rem',
+            color: '#666'
+          }}>
+            &copy; {new Date().getFullYear()} LMS Platform. All rights reserved.
+          </footer>
+        </AuthProvider>
       </body>
     </html>
   );
 }
+
 

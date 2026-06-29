@@ -10,12 +10,47 @@ export const apiClient = axios.create({
   },
 });
 
+// Interceptor to add access token
 apiClient.interceptors.request.use(
   (config) => {
-    // Standard authorization token placeholder
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    }
     return config;
   },
-  (error) => {
+  (error) => Promise.reject(error)
+);
+
+// Interceptor to handle expired tokens and refresh them
+apiClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      try {
+        // Call refresh endpoint to obtain a new access token
+        const response = await axios.post(
+          `${API_URL}/auth/refresh`,
+          {},
+          { withCredentials: true }
+        );
+        if (response.data?.success && response.data?.accessToken) {
+          const newToken = response.data.accessToken;
+          localStorage.setItem('accessToken', newToken);
+          originalRequest.headers.Authorization = `Bearer ${newToken}`;
+          return apiClient(originalRequest);
+        }
+      } catch (refreshError) {
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('accessToken');
+          // Optional: redirect to login if session expired
+        }
+      }
+    }
     return Promise.reject(error);
   }
 );
